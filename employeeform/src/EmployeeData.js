@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from "axios";
-import Validation from './Validation';
 
 
 const EmployeeData = () => {
@@ -9,9 +8,8 @@ const EmployeeData = () => {
     const[content,setContent] = useState({
      employeename: "",projectname: "",shifttimings: "",holidaydate: "",description:"",managername:""
     });
-    // const[disable, setDisable]=useState('typing');
-    // const[error,setError]=useState(false)
-    
+    const[disable, setDisable]=useState('typing');
+  
     let name,value;
 
     const handleInputs = (e) => {
@@ -22,16 +20,14 @@ const EmployeeData = () => {
         setContent({...content,[name]:value});
     }
    
-    const handleSubmit =(e)=>{
-       e.preventDefault();
+    const handleSubmit =()=>{
+     
       axios.post('http://localhost:8082/emp',content)
       .then(res => console.log(res))
       .catch(err => console.log(err));
-      // setDisable('submitted');    
-    //   if(content.employeename === 0){
-    //     error.employeename = "Employee Name is Required!"
-    // }
-       setContent({employeename:"",projectname: "",shifttimings: "",holidaydate:"",description:"",managername:""})
+      setDisable('submitted');    
+      window.location.reload(false);
+      //  setContent({employeename:"",projectname: "",shifttimings: "",holidaydate:"",description:"",managername:""})
       
     }
 
@@ -44,7 +40,7 @@ const EmployeeData = () => {
           <table >
           <thead>
 					<tr><td><span >Employee Name</span></td><td>
-            <select name="employeename" required="true" id="employeename" value={content.employeename} onChange={handleInputs} >
+            <select name="employeename"  id="employeename" value={content.employeename} onChange={handleInputs} >
             <option value="" disable="true"  hidden>Select Employee Name</option>
               <option value="" disabled ></option>
               <option value="Poorna Mani Vulavalapudi">Poorna Mani Vulavalapudi</option><option value="Rasmita Pradhan">Rasmita Pradhan</option><option value="Goutham Garalapati">Goutham Garalapati</option>
@@ -61,7 +57,7 @@ const EmployeeData = () => {
               <option value="Chandan Charchit Sahu">Chandan Charchit Sahu</option><option value="Thumati Narendra Reddy">Thumati Narendra Reddy</option>
               <option value="hi" disabled ></option>
             </select></td></tr>
-             {/* {error.employeename && <p style={{color:"red"}}>{error.employeename}</p>} */}
+            
 					<tr><td><span >Project Name</span></td><td>
             <select name="projectname" id="projectname" value={content.projectname} onChange={handleInputs} > 
               <option disable="true"  hidden>Select Project Name</option>
@@ -123,13 +119,13 @@ const EmployeeData = () => {
         </form> 
 				</div>	       	
 				<div className="button">
-					<button type="submit" onClick={handleSubmit} /* disabled={content.employeename.length===0 || 
+					<button type="submit" onClick={handleSubmit} disabled={content.employeename.length===0 || 
                                     content.projectname.length===0 ||                                     
                                     content.shifttimings.length===0 ||
                                     content.holidaydate.length===0 ||
                                     content.description.length===0 ||
                                     content.managername.length===0 ||
-                                    disable==='submitted'} */>Submit</button>
+                                    disable==='submitted'}>Submit</button>
 				</div>	
                	
 			</div>

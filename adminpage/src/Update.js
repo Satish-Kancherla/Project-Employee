@@ -69,7 +69,7 @@ const Update = () => {
     </div>    
     </form>
     <div className='update-btn'>
-    <button onClick={handleUpdate}><Link to="/">submit</Link></button>
+    <button onClick={handleUpdate}><Link to="/filter">submit</Link></button>
     </div>
     </div>
     
