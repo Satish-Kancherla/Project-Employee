@@ -16,11 +16,11 @@ const AdminPage = () => {
 
     useEffect(()=>{
         fetchData();
-    })
+    },[])
    
     const fetchData = async()=>{
         try{
-            const result = await axios("http://localhost:8082/users");
+            const result = await axios("http://13.48.57.155/:8082/users");
             setData(result.data);
         } catch (err) {
             console.log("something Wrong");
@@ -48,8 +48,7 @@ const AdminPage = () => {
         <hr/>         
         <div className="btn-1">
         <div className='sort'>
-        
-        <Link to="/filter"><button className='button'>FILTER</button></Link>
+       <button className='button'> <Link to="/filter">FILTER</Link></button>
       </div>
       
         <button className="btn" onClick={generatePDF}>PDF</button>
@@ -83,9 +82,9 @@ const AdminPage = () => {
                                 <td className='data' >1</td>
                                 <td className='data'  ><Link to={`/update/${user.id}`}>
                                  
-                                    <select  className='data1'  name="status" value={user.status}  onChange={handleInputs}>
+                                    <select  className='data'  name="status" value={user.status}  onChange={handleInputs}>
                                         <option value="Pending">Pending</option>
-                                        <option value="Aprooved">Aprooved</option>
+                                        <option value="Approved">Approved</option>
                                      </select></Link></td>
                                 
                             </tr>

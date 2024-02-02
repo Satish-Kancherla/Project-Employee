@@ -24,12 +24,10 @@ const Jan = () => {
     
     const fetchData = async()=>{
         try{
-            const result = await axios("http://localhost:8082/users");
+            const result = await axios("http://13.48.57.155:8082/users");
             setData(result.data);
             setAllData(result.data);
             setFilterdata(result.data);
-            // console.log(result.data);
-            // console.log(result.data[0].holidaydate);
         } catch (err) {
             console.log("something Wrong");
         }
@@ -39,7 +37,6 @@ const Jan = () => {
     let name,values;
 
     const handleInputs = (e) => {
-        // console.log(e);
         name = e.target.name;
         values = e.target.value;
         setData({...data,[name]:values});
@@ -48,13 +45,12 @@ const Jan = () => {
     
 
     const handlesearch =(e)=>{
-        setFilterdata(data.filter(item =>item.employeename.toLowerCase().includes(e.target.value)))
+        setFilterdata(data.filter(item =>item.employeename.includes(e.target.value)))
     }
 
     const generatePDF= useReactToPrint({
         content: ()=>conponentPDF.current,
         documentTitle:"EmployeeData",
-        // onAfterPrint:()=>alert("Data saved in PDF")
     });
 
     const handleSelect = (date) => {
@@ -81,7 +77,7 @@ const Jan = () => {
     <div className='adminpage1' ref={conponentPDF} style={{width:'100%'}}>
          <h1>Admin Page</h1>
         <hr/>  
-        
+        <div className="btn-1">
         <div className='sort1'>
 
         <div className="search1"> 
@@ -89,9 +85,11 @@ const Jan = () => {
                 <input  type="text" name='name'  onChange={handlesearch} placeholder='Search...' />
                 <button  className="btn1" onClick={generatePDF}>PDF</button>       
         </div>
+        
         <div className='date1'>
             <DateRangePicker ranges={[selectionRange]} onChange={handleSelect}/><button className='date-button1' type='reset' onClick={handlesearch}>submit</button>
             </div>
+      </div>
       </div>
         <div className="adminpage-content1" >
             <table className='adminpage-table1'>
@@ -122,7 +120,7 @@ const Jan = () => {
                                 <td className='data1' name="managername" value={data.managername} onChange={handleInputs}>{user.managername}</td>
                                 <td className='data1'  >1</td>
                                 <td className='data1' name="status"   ><NavLink to={`/update/${user.id}`}>
-                                    <select  className='data2' name="status" value={user.status} onChange={handleInputs} /* onClick={handleStatus} */>
+                                    <select  className='data1' name="status" value={user.status} onChange={handleInputs} /* onClick={handleStatus} */>
                                     <option value="Pending">Pending</option>
                                     <option value="Aprooved">Aprooved</option>
                                 </select></NavLink></td>

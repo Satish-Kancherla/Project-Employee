@@ -16,7 +16,7 @@ const Update = () => {
     };
 
     useEffect(()=>{
-        axios.get("http://localhost:8082/userdetails/"+id)
+        axios.get("http://13.48.57.155:8082/userdetails/"+id)
         .then(res =>{
             setUser(res.data[0]);
         })
@@ -26,7 +26,7 @@ const Update = () => {
     const handleUpdate= async (e) => {
         e.preventDefault();
         try{
-            await axios.put(`http://localhost:8082/users/${id}`, user);
+            await axios.put(`http://13.48.57.155:8082/users/${id}`, user);
             
         }catch(err){
             console.log(err);
@@ -59,7 +59,7 @@ const Update = () => {
             <td className='data'  name="status"  id="status" >
             <select  className='data' id="status" name="status" value={user.status}  onChange={handleInputs}>
                 <option  value="Pending">Pending</option>
-                <option  value="Aprooved">Aprooved</option>
+                <option  value="Approved">Approved</option>
             </select></td>
             
             </tr>
