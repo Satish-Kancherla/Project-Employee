@@ -6,7 +6,7 @@ import { useReactToPrint } from "react-to-print";
 import {DateRangePicker} from "react-date-range";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Jan = () => {
@@ -107,11 +107,9 @@ const Jan = () => {
                 </thead >
                 <tbody>
                     {filterdata.map((user,id) => {
-                        // const{employeename,projectname,shifttimings,description,managername,status} =user;
                         let date= new Date(user['holidaydate']);
                         return (
                             <tr key={id}>
-                                {/* <td>{i+1} </td> */}
                                 <td className='data1' name="employeename" value={data.employeename} onChange={handleInputs}>{user.employeename}</td>
                                 <td className='data1' name="projectname" value={data.projectname} onChange={handleInputs}>{user.projectname}</td>
                                 <td className='data1' name="shifttimings" value={data.shifttimings} onChange={handleInputs}>{user.shifttimings}</td>
@@ -119,11 +117,11 @@ const Jan = () => {
                                 <td className='data1' name="description" value={data.description} onChange={handleInputs}>{user.description}</td>
                                 <td className='data1' name="managername" value={data.managername} onChange={handleInputs}>{user.managername}</td>
                                 <td className='data1'  >1</td>
-                                <td className='data1' name="status"   ><NavLink to={`/update/${user.id}`}>
+                                <td className='data1' ><Link to={`/update/${user.id}`}>
                                     <select  className='data1' name="status" value={user.status} onChange={handleInputs} /* onClick={handleStatus} */>
                                     <option value="Pending">Pending</option>
                                     <option value="Aprooved">Aprooved</option>
-                                </select></NavLink></td>
+                                </select></Link></td>
                             </tr>
                         )
                     })
