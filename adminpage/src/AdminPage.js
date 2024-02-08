@@ -20,7 +20,7 @@ const AdminPage = () => {
    
     const fetchData = async()=>{
         try{
-            const result = await axios("http://13.48.57.155:8082/users");
+            const result = await axios("http://16.171.16.133:8082/users");
             setData(result.data);
         } catch (err) {
             console.log("something Wrong");
